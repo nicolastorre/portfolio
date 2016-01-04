@@ -136,11 +136,11 @@ class BioController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
-		/*if (!$app['security']->isGranted('ROLE_ADMIN')) {
-			throw new AccessDeniedException();
-		}*/
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$this->repository['bioRepository']->delete($id);
+		$deleteForm = $this->deleteForm($app, 'deleteArticle');
+		$deleteForm->handleRequest($request);
+		if ($deleteForm->isValid()) {
+			$data = $deleteForm->getData();
+			$this->repository['bioRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The bio was successfully removed.');
 			return $app->redirect('/admin/bio/list');
 		}

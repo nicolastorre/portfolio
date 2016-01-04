@@ -101,13 +101,16 @@ class UserController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
+		$deleteForm = $this->deleteForm($app, 'deleteArticle');
+		$deleteForm->handleRequest($request);
+		if ($deleteForm->isValid()) {
+			$data = $deleteForm->getData();
 			$nbAdmin = $app['userRepository']->countByRole('ROLE_ADMIN');
 			if($nbAdmin == 1) {
 				$app['session']->getFlashBag()->add('error', 'Forbidden action: no more admin!');
 				return $app->redirect('/admin/user/list');
 			}
-			$this->repository['userRepository']->delete($id);
+			$this->repository['userRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The user was successfully removed.');
 			return $app->redirect('/admin/user/list');
 		}

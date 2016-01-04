@@ -142,9 +142,12 @@ class ArticleController extends DefaultController
 	 * @param $id
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function deleteAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$this->repository['articleRepository']->delete($id);
+	public function deleteAction(Request $request, Application $app) {
+		$deleteForm = $this->deleteForm($app, 'deleteArticle');
+		$deleteForm->handleRequest($request);
+		if ($deleteForm->isValid()) {
+			$data = $deleteForm->getData();
+			$this->repository['articleRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The article was succesfully removed.');
 			return $app->redirect('/admin/article/list');
 		}

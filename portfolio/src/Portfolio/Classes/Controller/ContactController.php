@@ -55,8 +55,11 @@ class ContactController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$this->repository['contactRepository']->delete($id);
+		$deleteForm = $this->deleteForm($app, 'deleteArticle');
+		$deleteForm->handleRequest($request);
+		if ($deleteForm->isValid()) {
+			$data = $deleteForm->getData();
+			$this->repository['contactRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The contact was successfully removed.');
 			return $app->redirect('/admin/contact/list');
 		}

@@ -69,8 +69,11 @@ class DiplomaController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$this->repository['diplomaRepository']->delete($id);
+		$deleteForm = $this->deleteForm($app, 'deleteArticle');
+		$deleteForm->handleRequest($request);
+		if ($deleteForm->isValid()) {
+			$data = $deleteForm->getData();
+			$this->repository['diplomaRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The diploma was successfully removed.');
 			return $app->redirect('/admin/bio/list');
 		}
