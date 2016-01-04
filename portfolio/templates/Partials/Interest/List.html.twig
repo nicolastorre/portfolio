@@ -1,6 +1,6 @@
 <div class="tab-pane fade in active adminTable well" id="interests">
     <h2>Interests</h2>
-    {% if user.interests %}
+    {% if bio.interest %}
         <div class="table-responsive">
             <table class="table table-hover table-condensed">
                 <thead>
@@ -11,7 +11,7 @@
                 </tr>
                 </thead>
 
-                {% for interest in user.interests %}
+                {% for interest in bio.interest %}
                     <tr>
                         <td>{{ interest.label }}</td>
                         <td>{{ interest.link }}</td>
@@ -26,5 +26,5 @@
     {% else %}
         <div class="alert alert-warning">No interest found.</div>
     {% endif %}
-    <a href="{{ path('addInterest') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add interest</button></a>
+    <a href="{{ path('addInterest',{'idbio': bio.id}) }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add interest</button></a>
 </div>

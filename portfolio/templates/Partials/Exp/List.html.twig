@@ -1,6 +1,6 @@
 <div class="tab-pane fade in active adminTable well" id="exps">
     <h2>Professional experiences</h2>
-    {% if user.exps %}
+    {% if bio.exp %}
         <div class="table-responsive">
             <table class="table table-hover table-condensed">
                 <thead>
@@ -12,7 +12,7 @@
                 </tr>
                 </thead>
 
-                {% for exp in user.exps %}
+                {% for exp in bio.exp %}
                     <tr>
                         <td>{{ exp.startDate | date("Y-m-d") }}</td>
                         <td>{{ exp.endDate | date("Y-m-d") }}</td>
@@ -28,5 +28,5 @@
     {% else %}
         <div class="alert alert-warning">No exp found.</div>
     {% endif %}
-    <a href="{{ path('addExp') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add exp</button></a>
+    <a href="{{ path('addExp',{'idbio': bio.id}) }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add exp</button></a>
 </div>

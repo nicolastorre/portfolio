@@ -59,10 +59,9 @@ class BioController extends DefaultController
 	public function listAction(Request $request, Application $app) {
 
 		$bio = $this->repository['bioRepository']->findAll();
-		var_dump($bio);
 
 		return $app['twig']->render('Pages/Bio/List.html.twig', array(
-			'bio' => $bio,
+			'bio' => current($bio),
 		));
 	}
 
