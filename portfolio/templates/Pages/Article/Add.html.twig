@@ -35,7 +35,7 @@
             {{ form_label(articleForm.publishedDate, NULL, { 'label_attr':  {
                 'class': 'col-sm-4 control-label'
             }}) }}
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 {{ form_errors(articleForm.publishedDate) }}
                 {{ form_widget(articleForm.publishedDate) }}
             </div>
@@ -56,7 +56,7 @@
             <div class="col-sm-6">
                 {{ form_errors(articleForm.published) }}
                 {{ form_widget(articleForm.published) }}
-                {{ form_widget(articleForm.author) }}
+                {#{{ form_widget(articleForm.user) }}#}
             </div>
         </div>
         <div class="form-group">
@@ -67,7 +67,7 @@
         {{ form_end(articleForm) }}
     </div>
     <script>
-        $('#article_image').fileinput({showUpload: false});
+        $('#article_image input').fileinput({showUpload: false});
         $('.selectpicker *').selectpicker();
         tinymce.init({
             selector: "#article_content",

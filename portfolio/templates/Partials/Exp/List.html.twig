@@ -1,0 +1,32 @@
+<div class="tab-pane fade in active adminTable well" id="exps">
+    <h2>Professional experiences</h2>
+    {% if user.exps %}
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Title</th>
+                    <th></th>  <!-- Actions column -->
+                </tr>
+                </thead>
+
+                {% for exp in user.exps %}
+                    <tr>
+                        <td>{{ exp.startDate | date("Y-m-d") }}</td>
+                        <td>{{ exp.endDate | date("Y-m-d") }}</td>
+                        <td><a class="articleTitle" href="#">{{ exp.title }}</a></td>
+                        <td>
+                            {% include 'Partials/Elements/EditDeleteConfirmDialog.html.twig' with {objectName: 'Exp', object: exp, attr: 'id'}  %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">No exp found.</div>
+    {% endif %}
+    <a href="{{ path('addExp') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add exp</button></a>
+</div>

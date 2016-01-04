@@ -1,0 +1,32 @@
+<div class="tab-pane fade in active adminTable well" id="diplomas">
+    <h2>Diplomas</h2>
+    {% if user.diplomas %}
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Title</th>
+                    <th></th>  <!-- Actions column -->
+                </tr>
+                </thead>
+
+                {% for diploma in user.diplomas %}
+                    <tr>
+                        <td>{{ diploma.startDate | date("Y-m-d") }}</td>
+                        <td>{{ diploma.endDate | date("Y-m-d") }}</td>
+                        <td><a class="articleTitle" href="#">{{ diploma.title }}</a></td>
+                        <td>
+                            {% include 'Partials/Elements/EditDeleteConfirmDialog.html.twig' with {objectName: 'Diploma', object: diploma, attr: 'id'}  %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">No diplomas found.</div>
+    {% endif %}
+    <a href="{{ path('addDiploma') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add diploma</button></a>
+</div>

@@ -3,14 +3,14 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            {% include 'Partials/Sidebar/Blog.html.twig' %}
+            {% include 'Partials/Elements/Sidebar/Blog.html.twig' %}
 
-            <div class="col-lg-8">
+            <div class="col-xs-12 col-sm-8 col-md-8">
                 {% for article in articles %}
                     <div class="row well">
-                        <h1>{{ article.title }}</h1>
+                        <h1><a href="{{ path('showArticle', {'id': article.id}) }}" title="{{ article.title }}">{{ article.title }}</a></h1>
                         <hr>
-                        <img class="img-responsive" src="{{ imgdir(article.image) }}" alt=""> <!--http://placehold.it/900x300-->
+                        <img class="img-responsive" src="upload/{{ article.image }}" alt=""> <!--http://placehold.it/900x300-->
                         <hr>
                         <p class="lead text-justify">{{ article.content|raw }}</p>
                         <p class="author-date">Posté par <a href="{{ path('indexBio') }}">{{ user(article.author).username }}</a><i class="glyphicon glyphicon-time"></i> le {{ article.publishedDate |date("j M Y") }}</p>

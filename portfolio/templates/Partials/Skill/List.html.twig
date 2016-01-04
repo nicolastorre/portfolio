@@ -1,0 +1,31 @@
+<div class="tab-pane fade in active adminTable well" id="skills">
+    <h2>Skills</h2>
+    {% if user.skills %}
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Level</th>
+                    <th></th>  <!-- Actions column -->
+                </tr>
+                </thead>
+
+                {% for skill in user.skills %}
+                    <tr>
+                        <td>{{ skill.label }}</td>
+                        <td>{{ skill.link }}</td>
+                        <td>{{ skill.level }}</td>
+                        <td>
+                            {% include 'Partials/Elements/EditDeleteConfirmDialog.html.twig' with {objectName: 'Skill', object: skill, attr: 'id'}  %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">No skill found.</div>
+    {% endif %}
+    <a href="{{ path('addSkill') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add skill</button></a>
+</div>

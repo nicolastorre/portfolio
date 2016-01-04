@@ -7,28 +7,6 @@
 
         {{ form_start(bioForm, { 'attr': {'class': 'form-horizontal'} }) }}
         <div class="form-group">
-            {{ form_label(bioForm.firstName, NULL, { 'label_attr':  {
-                'class': 'col-sm-4 control-label'
-            }}) }}
-            <div class="col-sm-6">
-                {{ form_errors(bioForm.firstName) }}
-                {{ form_widget(bioForm.firstName, { 'attr':  {
-                    'class': 'form-control'
-                }}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(bioForm.lastName, NULL, { 'label_attr':  {
-                'class': 'col-sm-4 control-label'
-            }}) }}
-            <div class="col-sm-6">
-                {{ form_errors(bioForm.lastName) }}
-                {{ form_widget(bioForm.lastName, { 'attr':  {
-                    'class': 'form-control'
-                }}) }}
-            </div>
-        </div>
-        <div class="form-group">
             {{ form_label(bioForm.image, NULL, { 'label_attr':  {
                 'class': 'col-sm-4 control-label'
             }}) }}
@@ -57,6 +35,6 @@
         {{ form_end(bioForm) }}
     </div>
     <script>
-        $('#bio_image').fileinput({showUpload: false});
+        $('#bio_image input').fileinput({showUpload: false});
     </script>
 {% endblock %}

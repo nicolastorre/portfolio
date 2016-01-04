@@ -3,16 +3,16 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            {% include 'Partials/Sidebar/Blog.html.twig' %}
+            {% include 'Partials/Elements/Sidebar/Blog.html.twig' %}
 
             <div class="col-lg-8">
                 <div class="row well">
                     <h1>{{ article.title }}</h1>
                     <hr>
-                    <img class="img-responsive" src="/upload/{{ article.image }}" alt=""> <!--http://placehold.it/900x300-->
+                    <img class="img-responsive" src="upload/{{ article.image.id}}.{{ article.image.url }}" alt=""> <!--http://placehold.it/900x300-->
                     <hr>
                     <p class="lead text-justify">{{ article.content | raw }}</p>
-                    <p class="author-date">Posté par <a href="{{ path('indexBio') }}">{{ user(article.author).username }}</a><i class="glyphicon glyphicon-time"></i> le {{ article.publishedDate |date("j M Y") }}</p>
+                    <p class="author-date">Posté par <a href="{{ path('indexBio') }}">{{ article.user.username }}</a><i class="glyphicon glyphicon-time"></i> le {{ article.publishedDate |date("j M Y") }}</p>
                     <hr>
                     <div class="well">
                         <h4>Poster un commentaire:</h4>

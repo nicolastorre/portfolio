@@ -1,0 +1,29 @@
+<!-- Menu -->
+<div id="menu" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Nicolas Torre</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('home') }}">Blog</a></li>
+                <li><a href="{{  path('indexBio') }}">Bio</a></li>
+                <li><a href="{{  path('addContact') }}">Contact</a></li>
+                <li><a href="{{ path('listArticle') }}">Admin</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li><a href="{{ links.email }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-email"></span></a></li>
+                <li><a href="{{ links.linkedin }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-linkedin"></span></a></li>
+                <li><a href="{{ links.twitter }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-twitter"></span></a></li>
+                <li><a href="{{ links.github }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-github"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Fin Menu -->

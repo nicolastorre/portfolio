@@ -214,6 +214,16 @@ $app['twig'] = $app->share(
 	$app->extend(
 		'twig',
 		function ($twig, $app) {
+			$twig->addExtension(new \Portfolio\Classes\Twig\Extension\DeleteFormExtension($app));
+			return $twig;
+		}
+	)
+);
+
+$app['twig'] = $app->share(
+	$app->extend(
+		'twig',
+		function ($twig, $app) {
 			$twig->addExtension(new Twig_Extensions_Extension_Text());
 			return $twig;
 		}

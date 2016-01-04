@@ -1,0 +1,47 @@
+<footer id="footer" class="footer">
+    <div>
+        <div class="container">
+            <div class="row hidden visible-xs">
+                <div class="col-xs-9 col-xs-offset-3">
+                    <ul>
+                        <li class="nav-footer-icon"><a href="{{ links.email }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-email"></span></a></li>
+                        <li class="nav-footer-icon"><a href="{{ links.linkedin }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-linkedin"></span></a></li>
+                        <li class="nav-footer-icon"><a href="{{ links.twitter }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-twitter"></span></a></li>
+                        <li class="nav-footer-icon"><a href="{{ links.github }}" target="_blank" rel="nofollow" ><span class="glyphicon glyphicon-custom glyphicon-github"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row nav-blog">
+                <div class="col-sm-3 col-sm-offset-1 hidden-xs">
+                    <h4>Articles récents</h4>
+                    <ul class="list-unstyled">
+                        {%  for article in recentArticles %}
+                            <li><a href="{{ path('showArticle', {'id': article.id}) }}">{{ article.title }}</a></li>
+                        {%  endfor %}
+                    </ul>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1 hidden-xs">
+                    <h4>Recherche</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <div class="license">
+                        <p>Cette oeuvre est mise à disposition selon les termes de la Licence Creative Commons Attribution 3.0 non transposé.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    Copyright 2015 Nicolas Torre <a href="{{ path('mentionslegalesStatic') }}">Mentions Légales</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

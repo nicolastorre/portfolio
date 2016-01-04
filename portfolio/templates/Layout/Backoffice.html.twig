@@ -26,93 +26,93 @@
 </head>
 <body>
 
-    <!-- Menu -->
-    <div id="menu" class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="{{ path('listArticle') }}" class="navbar-brand">Backoffice Nicolas Torre</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ path('listArticle') }}">Blog</a></li>
-                    <li><a href="{{ path('listBio') }}">Bio</a></li>
-                    <li><a href="{{  path('listContact') }}">Message</a></li>
-                    <li><a href="{{ path('listUser') }}">User</a></li>
-                    <li><a href="{{ path('home') }}" target="__blank">Preview</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">{{ app.security.token ? app.security.token.user.username : null }}</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Flush all caches</a></li>
-                            <li><a href="{{ path('admin_logout') }}">Log out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+<!-- Menu -->
+<div id="menu" class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{{ path('listArticle') }}" class="navbar-brand">Backoffice Nicolas Torre</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('listArticle') }}">Blog</a></li>
+                <li><a href="{{ path('listBio') }}">Bio</a></li>
+                <li><a href="{{  path('listContact') }}">Message</a></li>
+                <li><a href="{{ path('listUser') }}">User</a></li>
+                <li><a href="{{ path('home') }}" target="__blank">Preview</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ app.security.token ? app.security.token.user.username : null }}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Flush all caches</a></li>
+                        <li><a href="{{ path('admin_logout') }}">Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
-    <!-- Fin Menu -->
+</div>
+<!-- Fin Menu -->
 
-    <div class="col-md-12 main">
+<div class="col-md-12 main">
 
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">
-                {{ flashMessage }}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {#
+        {% for key, flash in app.session.getFlashes() %}
+            <div class="errors">
+                {{ flash }}
             </div>
         {% endfor %}
-        {#
-            {% for key, flash in app.session.getFlashes() %}
-                <div class="errors">
-                    {{ flash }}
-                </div>
-            {% endfor %}
-        #}
+    #}
 
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
+</div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row nav-blog">
-                <div class="col-sm-3 col-sm-offset-1">
-                    <h4>Articles récents</h4>
-                    <ul class="list-unstyled">
-                        {%  for article in recentArticles %}
-                            <li><a href="{{ path('showArticle', {'id': article.id}) }}">{{ article.title }}</a></li>
-                        {%  endfor %}
-                    </ul>
-                </div>
-                <div class="col-sm-3 col-sm-offset-1">
-                    <h4>Recherche</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
+<footer class="footer">
+    <div class="container">
+        <div class="row nav-blog">
+            <div class="col-sm-3 col-sm-offset-1">
+                <h4>Articles récents</h4>
+                <ul class="list-unstyled">
+                    {%  for article in recentArticles %}
+                        <li><a href="{{ path('showArticle', {'id': article.id}) }}">{{ article.title }}</a></li>
+                    {%  endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-3 col-sm-offset-1">
+                <h4>Recherche</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-sm-offset-1">
-                    <p>Cette oeuvre est mise à disposition selon les termes de la Licence Creative Commons Attribution 3.0 non transposé.</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <a href="https://twitter.com/utc_compiegne" class="external"><i class="ion ion-social-twitter"></i><span class="sr-only">Page twitter</span></a>
-                    Copyright 2015 Nicolas Torre <a href="{{ path('mentionslegalesStatic') }}">Mentions Légales</a>
-                </div>
+            <div class="col-sm-3 col-sm-offset-1">
+                <p>Cette oeuvre est mise à disposition selon les termes de la Licence Creative Commons Attribution 3.0 non transposé.</p>
             </div>
         </div>
-    </footer>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <a href="https://twitter.com/utc_compiegne" class="external"><i class="ion ion-social-twitter"></i><span class="sr-only">Page twitter</span></a>
+                Copyright 2015 Nicolas Torre <a href="{{ path('mentionslegalesStatic') }}">Mentions Légales</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

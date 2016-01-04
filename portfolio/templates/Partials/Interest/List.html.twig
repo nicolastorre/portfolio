@@ -1,0 +1,30 @@
+<div class="tab-pane fade in active adminTable well" id="interests">
+    <h2>Interests</h2>
+    {% if user.interests %}
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Link</th>
+                    <th></th>  <!-- Actions column -->
+                </tr>
+                </thead>
+
+                {% for interest in user.interests %}
+                    <tr>
+                        <td>{{ interest.label }}</td>
+                        <td>{{ interest.link }}</td>
+                        <td>
+                            {% include 'Partials/Elements/EditDeleteConfirmDialog.html.twig' with {objectName: 'Interest', object: interest, attr: 'id'}  %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">No interest found.</div>
+    {% endif %}
+    <a href="{{ path('addInterest') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add interest</button></a>
+</div>
