@@ -1,0 +1,63 @@
+{% extends 'Layout/Backoffice.html.twig' %}
+
+{% block content %}
+
+    <div class="well">
+        <h2 class="text-center">{{ title }}</h2>
+
+        {{ form_start(diplomaForm, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div class="form-group">
+            {{ form_label(diplomaForm.startDate, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(diplomaForm.startDate) }}
+                {{ form_widget(diplomaForm.startDate) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(diplomaForm.endDate, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(diplomaForm.endDate) }}
+                {{ form_widget(diplomaForm.endDate) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(diplomaForm.title, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(diplomaForm.title) }}
+                {{ form_widget(diplomaForm.title, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(diplomaForm.description, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(diplomaForm.description) }}
+                {{ form_widget(diplomaForm.description, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+                {{ form_widget(diplomaForm.bio) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+        </div>
+        {{ form_end(diplomaForm) }}
+    </div>
+
+    <script>
+        $('.selectpicker *').selectpicker();
+    </script>
+
+{% endblock %}

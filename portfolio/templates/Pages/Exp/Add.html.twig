@@ -1,0 +1,72 @@
+{% extends 'Layout/Backoffice.html.twig' %}
+
+{% block content %}
+
+    <div class="well">
+        <h2 class="text-center">{{ title }}</h2>
+
+        {{ form_start(expForm, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div class="form-group">
+            {{ form_label(expForm.startDate, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(expForm.startDate) }}
+                {{ form_widget(expForm.startDate) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(expForm.endDate, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(expForm.endDate) }}
+                {{ form_widget(expForm.endDate) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(expForm.current, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(expForm.current) }}
+                {{ form_widget(expForm.current) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(expForm.title, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(expForm.title) }}
+                {{ form_widget(expForm.title, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(expForm.description, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(expForm.description) }}
+                {{ form_widget(expForm.description, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+                {{ form_widget(expForm.bio) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+        </div>
+        {{ form_end(expForm) }}
+    </div>
+
+    <script>
+        $('.selectpicker *').selectpicker();
+    </script>
+
+{% endblock %}

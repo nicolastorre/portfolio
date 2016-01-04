@@ -1,0 +1,34 @@
+#Config Prod
+data/db.sql
+portfolio/app/Config/Prod.php
+portfolio/cache/*
+portfolio/web/cache/*
+portfolio/web/upload/*
+
+#web
+portfolio/web/sitemap.xml
+portfolio/web/robots.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vagrant
+.vagrant/
+vagrant_hosts
+
+# Netbeans
+/nbproject/*
+
+# Phpstorm (https://www.jetbrains.com/idea/help/managing-projects-under-version-control.html)
+.idea/
+.idea/dictionaries
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/inspectionProfiles
+.idea/dataSources.*
+.idea/deployment.xml
+
+# Divers
+portfolio/vendor/*
+/dump

@@ -1,0 +1,65 @@
+{% extends "Layout/Default.html.twig" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% include 'Partials/Sidebar/Blog.html.twig' %}
+
+            <div class="col-lg-8">
+                <div class="row well">
+                    <h1>{{ article.title }}</h1>
+                    <hr>
+                    <img class="img-responsive" src="/upload/{{ article.image }}" alt=""> <!--http://placehold.it/900x300-->
+                    <hr>
+                    <p class="lead text-justify">{{ article.content | raw }}</p>
+                    <p class="author-date">Posté par <a href="{{ path('indexBio') }}">{{ user(article.author).username }}</a><i class="glyphicon glyphicon-time"></i> le {{ article.publishedDate |date("j M Y") }}</p>
+                    <hr>
+                    <div class="well">
+                        <h4>Poster un commentaire:</h4>
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Publier</button>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Start Bootstrap
+                                <small>August 25, 2014 at 9:30 PM</small>
+                            </h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        </div>
+                    </div>
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Start Bootstrap
+                                <small>August 25, 2014 at 9:30 PM</small>
+                            </h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object" src="http://placehold.it/64x64" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Nested Start Bootstrap
+                                        <small>August 25, 2014 at 9:30 PM</small>
+                                    </h4>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

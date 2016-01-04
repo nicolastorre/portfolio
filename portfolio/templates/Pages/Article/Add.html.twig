@@ -1,0 +1,123 @@
+{% extends 'Layout/Backoffice.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    <div class="well">
+        <h2 class="text-center">{{ block('title') }}</h2>
+
+        {{ form_start(articleForm, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div class="form-group">
+            {{ form_label(articleForm.title, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(articleForm.title) }}
+                {{ form_widget(articleForm.title, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(articleForm.content, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(articleForm.content) }}
+                {{ form_widget(articleForm.content, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '15'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(articleForm.publishedDate, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(articleForm.publishedDate) }}
+                {{ form_widget(articleForm.publishedDate) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(articleForm.image, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(articleForm.image) }}
+                {{ form_widget(articleForm.image) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(articleForm.published, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(articleForm.published) }}
+                {{ form_widget(articleForm.published) }}
+                {{ form_widget(articleForm.author) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="Save" formnovalidate="true"/>
+            </div>
+        </div>
+        {{ form_end(articleForm) }}
+    </div>
+    <script>
+        $('#article_image').fileinput({showUpload: false});
+        $('.selectpicker *').selectpicker();
+        tinymce.init({
+            selector: "#article_content",
+            theme: "modern",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern imagetools"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+            templates: [
+                {title: 'Test template 1', content: 'Test 1'},
+                {title: 'Test template 2', content: 'Test 2'}
+            ],
+            file_browser_callback: function(field_name, url, type, win) {
+                tinymce.activeEditor.windowManager.open({
+                    title: 'My File Manager',
+                    width: 450,
+                    height: 305,
+                    resizable : "no",
+                    inline : "yes",
+                    close_previous : "no",
+                    buttons: [{
+                        text: 'Insert',
+                        classes: 'widget btn primary first abs-layout-item',
+                        disabled: true,
+                        onclick: 'close',
+                        id: 'insertButton'
+                    }, {
+                        text: 'Close',
+                        onclick: 'close',
+                        window : win,
+                        input : field_name
+                    }]
+                }, {
+                    oninsert: function(url) {
+                        win.document.getElementById(field_name).value = url;
+                    },
+                    onselect: function() {
+                        //
+                    }
+                });
+
+                return false;
+            }
+        });
+
+
+    </script>
+{% endblock %}

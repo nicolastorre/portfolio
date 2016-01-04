@@ -1,0 +1,57 @@
+{% extends "Layout/Backoffice.html.twig" %}
+
+{% block content %}
+
+    <div class="tab-pane fade in active adminTable well" id="articles">
+    <h2>Articles</h2>
+    {% if articles %}
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th></th>  <!-- Actions column -->
+                    </tr>
+                </thead>
+
+                {% for article in articles %}
+                    <tr class="{% if article.published == 0 %}unpublished{% endif %}">
+                        <td>{{ article.title }}</td>
+                        <td>{{ article.publishedDate|date("j M Y") }}</td>
+                        <td><a href="{{ path('showArticle', { 'id': article.id })  }}" target="_blank" class="btn btn-info btn-xs">Preview</a></td>
+                        <td>
+                            <a href="{{ path('editArticle', { 'id': article.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                            <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#articleDialog{{ article.id }}"><span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <div class="modal fade" id="articleDialog{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Do you really want to delete this article ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <a href="{{ path('deleteArticle', { 'id': article.id }) }}" class="btn btn-danger">Confirm</a>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">No articles found.</div>
+    {% endif %}
+    <a href="{{ path('addArticle') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
+</div>
+
+
+{% endblock %}

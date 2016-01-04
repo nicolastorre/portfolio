@@ -1,0 +1,139 @@
+div.construction {
+    background-image: url("../img/construction.png");
+    background-repeat: no-repeat;
+    width: 320px;
+    height: 320px;
+    margin: auto;
+}
+
+h1.construction
+{
+    font-size: 4em;
+    text-align: center;
+}
+
+html, body {
+    height: 100%;
+    margin: 0; padding: 0;
+}
+
+body
+{
+    display : table;
+    width: 100%;
+
+    background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.sidebar
+{
+    color: #ccc;
+}
+
+.main
+{
+    padding-top: 70px;
+}
+
+/* sidebar */
+
+.well.widget
+{
+    border: none;
+    background-color: #1a1a1a;
+    background-image: none;
+    clear: both;
+}
+
+.widget p
+{
+    text-align: justify;
+}
+
+.widget img
+{
+    float: left;
+    margin: 5px 15px 10px 5px;
+}
+
+/* Article */
+.author-date > i
+{
+    margin-left: 10px;
+}
+
+.unpublished
+{
+    background-color: #9D9D9D;
+}
+
+/* Bio */
+
+.diploma-item,
+.bio-item
+{
+    margin-bottom: 20px;
+}
+
+.diploma h4, .exp h4
+{
+    margin: 0 0 10px;
+}
+.diploma p, .exp p
+{
+    text-align: justify;
+}
+
+/* footer */
+
+.footer
+{
+    background-color: #1a1a1a;
+    display : table-row;
+    height: 100px;
+}
+
+.footer .container
+{
+    padding: 30px 0;
+}
+
+.footer .nav-blog li
+{
+    font-size: 1em;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
+.footer .row
+{
+    margin-bottom: 20px;
+}
+
+/* glyphicon */
+
+.glyphicon-custom
+{
+    width: 18px;
+    height: 18px;
+    background-size: 18px 18px;
+}
+
+.glyphicon-email
+{
+    background-image: url('../img/glyphicon/email.png');
+}
+.glyphicon-linkedin
+{
+    background-image: url('../img/glyphicon/linkedin.png');
+}
+.glyphicon-twitter
+{
+    background-image: url('../img/glyphicon/twitter.png');
+}
+.glyphicon-github
+{
+    background-image: url('../img/glyphicon/github.png');
+}
