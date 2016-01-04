@@ -19,9 +19,6 @@ class UserForm extends AbstractType
 	{
 		$builder
 			->add('username')
-			->add('firstname')
-			->add('lastname')
-			->add('email','email',array('label' => 'E-mail'))
 			->add('password', 'repeated', array(
 				'type'            => 'password',
 				'invalid_message' => 'The password fields must match.',
@@ -32,15 +29,6 @@ class UserForm extends AbstractType
 			->add('role', 'choice', array(
 				'choices' => array('ROLE_ADMIN' => 'Admin', 'ROLE_USER' => 'User'),
 				'label' => 'Rights'
-			))
-			->add('isActive', 'choice', array(
-				'label' => 'Bio',
-				'choices' => array(
-					1   => 'Yes',
-					0   => 'No',
-				),
-				'multiple' => false,
-				'expanded' => true,
 			));
 	}
 

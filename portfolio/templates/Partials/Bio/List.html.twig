@@ -1,8 +1,8 @@
 <div class="tab-pane fade in active adminTable well" id="bio">
     <h2>Bio</h2>
-    {% if user.bio %}
+    {% if bio %}
         <div>
-            <a href="{{ path('editBio') }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            {% include 'Partials/Elements/EditDeleteConfirmDialog.html.twig' with {objectName: 'Bio', object: bio, attr: 'id'}  %}
         </div>
         <div class="table-responsive">
             <table class="table table-hover table-condensed">
@@ -12,13 +12,13 @@
                 </tr>
                 </thead>
                 <tr>
-                    <th>First name</th><td>{{  user.firstname }}</td>
+                    <th>First name</th><td>{{  bio.firstname }}</td>
                 </tr>
                 <tr>
-                    <th>Last name</th><td>{{ user.lastname }}</td>
+                    <th>Last name</th><td>{{ bio.lastname }}</td>
                 </tr>
                 <tr>
-                    <th>Presentation</th><td>{{  user.bio.presentation }}</td>
+                    <th>Presentation</th><td>{{  bio.presentation }}</td>
                 </tr>
 
             </table>
@@ -26,4 +26,5 @@
     {% else %}
         <div class="alert alert-warning">No bio found.</div>
     {% endif %}
+    <a href="{{ path('addBio') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add bio</button></a>
 </div>

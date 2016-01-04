@@ -57,13 +57,9 @@ class BioController extends DefaultController
 	 * @return mixed
 	 */
 	public function listAction(Request $request, Application $app) {
+
 		$bio = $this->repository['bioRepository']->findAll();
-		if(count($bio) > 1) {
-			// deleteAll
-		}
-		elseif(count($bio) == 1) {
-			$bio = current($bio);
-		}
+		var_dump($bio);
 
 		return $app['twig']->render('Pages/Bio/List.html.twig', array(
 			'bio' => $bio,

@@ -12,39 +12,6 @@
         </div>
     </div>
     <div class="form-group">
-        {{ form_label(userForm.firstname, NULL, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_errors(userForm.firstname) }}
-            {{ form_widget(userForm.firstname, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(userForm.lastname, NULL, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_errors(userForm.lastname) }}
-            {{ form_widget(userForm.lastname, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(userForm.email, NULL, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_errors(userForm.email) }}
-            {{ form_widget(userForm.email, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
-    <div class="form-group">
         {{ form_label(userForm.password.first, NULL, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
@@ -73,15 +40,6 @@
             {{ form_widget(userForm.role, { 'attr':  {
                 'class': 'form-control'
             }}) }}
-        </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(userForm.isActive, NULL, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_errors(userForm.isActive) }}
-            {{ form_widget(userForm.isActive) }}
         </div>
     </div>
     <div class="form-group">

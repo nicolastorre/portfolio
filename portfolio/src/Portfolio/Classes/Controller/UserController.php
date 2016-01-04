@@ -6,6 +6,7 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Portfolio\Domain\Model\User;
 use Portfolio\Classes\Form\UserForm;
+use Portfolio\Classes\Form\UserPasswordForm;
 use Portfolio\Classes\Controller;
 
 /**
@@ -52,7 +53,7 @@ class UserController extends DefaultController
 
 				$this->repository['userRepository']->save($user);
 				$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
-				return $app->redirect('/admin/user/list');
+				return $app->redirect($app["url_generator"]->generate('listUser'));
 			}
 			return $app['twig']->render('Pages/User/Add.html.twig', array(
 					'title' => 'New user',
@@ -85,11 +86,32 @@ class UserController extends DefaultController
 
 				$this->repository['userRepository']->save($user);
 				$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
-				return $app->redirect('/admin/user/list');
+				return $app->redirect($app["url_generator"]->generate('listUser'));
 			}
+
+			$userPasswordForm = $app['form.factory']->create(new UserPasswordForm(), $user);
+			$userPasswordForm->handleRequest($request);
+			if ($userPasswordForm->isValid()) {
+				$salt = substr(md5(time()), 0, 23);
+				$user->setSalt($salt);
+				$plainPassword = $user->getPassword();
+
+				// find the default encoder
+				$encoder = $app['security.encoder.digest'];
+				// compute the encoded password
+				$password = $encoder->encodePassword($plainPassword, $user->getSalt());
+				$user->setPassword($password);
+
+				$this->repository['userRepository']->save($user);
+				$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+				return $app->redirect($app["url_generator"]->generate('listUser'));
+			}
+
 			return $app['twig']->render('Pages/User/Add.html.twig', array(
 					'title' => 'Edit user',
-					'userForm' => $userForm->createView())
+					'userForm' => $userForm->createView(),
+					'userPasswordForm' => $userForm->createView()
+				)
 			);
 		}
 	}

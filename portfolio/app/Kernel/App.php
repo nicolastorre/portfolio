@@ -52,6 +52,17 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 			}),
 		),
 	),
+	'security.role_hierarchy' => array(
+		'ROLE_ADMIN' => array('ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH')
+	),
+	'security.access_rules' => array(
+		array('^/admin/.*/list', 'ROLE_USER'),
+		array('^/admin/user/edit', 'ROLE_USER'),
+		array('^/admin/user/delete', 'ROLE_USER'),
+		array('^/admin/.*/add', 'ROLE_ADMIN'),
+		array('^/admin/.*/edit', 'ROLE_ADMIN'),
+		array('^/admin/.*/delete', 'ROLE_ADMIN')
+	)
 ));
 
 /* Configuration */
