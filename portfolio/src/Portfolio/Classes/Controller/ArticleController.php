@@ -57,8 +57,6 @@ class ArticleController extends DefaultController
 	 */
 	public function listAction(Request $request, Application $app) {
 
-		var_dump(realpath("index.php"));
-
 		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
 			$articles = $this->repository['articleRepository']->findAll();
 
