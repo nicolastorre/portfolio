@@ -44,7 +44,7 @@ class DefaultController
 	protected function deleteFile($filename) {
 		$path = __DIR__ . self::UPLOAD_DIR;
 		$filepath = $path . $filename;
-		chmod($filepath, 0755);
+		@chmod($filepath, 0755);
 		@unlink($filepath);
 		return TRUE;
 	}
@@ -55,7 +55,7 @@ class DefaultController
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	protected function upload(Request $request, Form $form) {
+	protected function upload(Request $request, Form $form, $width, $height) {
 		$files = $request->files->get($form->getName());
 		if(!empty($files['image'])) {
 			$path = __DIR__ . self::UPLOAD_DIR;
@@ -65,7 +65,7 @@ class DefaultController
 			chmod($filepath, 0755);
 
 			Image::open($filepath)
-				->zoomCrop(900, 300, "#346A85", "center", "center")
+				->zoomCrop($width, $height, "#346A85", "center", "center")
 				->save($filepath);
 
 			return $filename;

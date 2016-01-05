@@ -57,7 +57,7 @@ class ArticleController extends DefaultController
 		$articleForm = $app['form.factory']->create(new ArticleForm(), $article);
 		$articleForm->handleRequest($request);
 		if ($articleForm->isValid()) {
-			$filename = $this->upload($request, $articleForm);
+			$filename = $this->upload($request, $articleForm, 900, 300);
 			$article->setImage($filename);
 
 			$this->repository['articleRepository']->save($article);
@@ -98,8 +98,9 @@ class ArticleController extends DefaultController
 		$articleForm = $app['form.factory']->create(new ArticleForm(), $article);
 		$articleForm->handleRequest($request);
 		if ($articleForm->isValid()) {
-			$filename = $this->upload($request, $articleForm);
+			$filename = $this->upload($request, $articleForm, 900, 300);
 			if(false !== $filename) {
+				$this->deleteFile($oldImage);
 				$article->setImage($filename);
 			} else {
 				$article->setImage($oldImage);

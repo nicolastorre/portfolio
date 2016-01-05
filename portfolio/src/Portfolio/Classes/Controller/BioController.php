@@ -57,7 +57,7 @@ class BioController extends DefaultController
 		$bioForm = $app['form.factory']->create(new BioForm(), $bio);
 		$bioForm->handleRequest($request);
 		if ($bioForm->isValid()) {
-			$filename = $this->upload($request, $bioForm);
+			$filename = $this->upload($request, $bioForm, 120, 120);
 			$bio->setImage($filename);
 
 			$this->repository['bioRepository']->save($bio);
@@ -83,8 +83,9 @@ class BioController extends DefaultController
 		$bioForm = $app['form.factory']->create(new BioForm(), $bio);
 		$bioForm->handleRequest($request);
 		if ($bioForm->isValid()) {
-			$filename = $this->upload($request, $bioForm);
+			$filename = $this->upload($request, $bioForm, 120, 120);
 			if(false !== $filename) {
+				$this->deleteFile($oldImage);
 				$bio->setImage($filename);
 			} else {
 				$bio->setImage($oldImage);

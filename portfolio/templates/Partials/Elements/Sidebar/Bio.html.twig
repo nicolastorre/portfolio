@@ -1,18 +1,18 @@
 <div class="col-md-4 sidebar">
     <div class="widget well">
-        <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+        <h4>Nicolas Torre</h4>
         <div class="row">
             <div class="col-sm-12">
                 <p>
-                    <img src="upload/{{ user.bio.image.id }}.{{ user.bio.image.url }}" alt="photo">
-                    {{ user.bio.presentation }}
+                    <img src="upload/{{ bio.image }}" alt="photo">
+                    {{ bio.presentation }}
                 </p>
             </div>
         </div>
     </div>
     <div class="widget well">
         <h4>Compétences</h4>
-        {% for skill in user.skills %}
+        {% for skill in bio.skill %}
             {% if skill.link is empty %}
             <div class="row">
                 <p class="col-sm-3">{{ skill.label }}</p>
@@ -28,7 +28,7 @@
     </div>
     <div class="widget well hidden-xs">
         <h4>Passions</h4>
-        {% for interest in user.interests %}
+        {% for interest in bio.interest %}
             <p>{{ interest.label }}</p>
         {% endfor %}
     </div>

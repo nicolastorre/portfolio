@@ -8,7 +8,7 @@
             <div class="col-lg-8">
                 <div class="well diploma">
                     <h4>Diplômes</h4>
-                    {% for diploma in user.diplomas %}
+                    {% for diploma in bio.diploma %}
                         <div class="diploma-item">
                             <div class="row">
                                 <div class="col-sm-4"><p>{{ diploma.startDate|date("d/m/Y") }} - {{ diploma.endDate|date("d/m/Y") }}</p></div>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="well exp">
                     <h4>Expériences professionnelles</h4>
-                    {% for exp in user.exps %}
+                    {% for exp in bio.exp %}
                         <div class="bio-item">
                             <div class="row">
                                 <div class="col-sm-4"><p>{{ exp.startDate|date("d/m/Y") }} {% if exp.current == 0 %}   -   {{ exp.endDate|date("d/m/Y") }} {% endif %}</p></div>
