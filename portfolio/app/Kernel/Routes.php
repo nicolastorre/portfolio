@@ -6,6 +6,7 @@ $app->get('/login', 'authenticationController:loginAction')->bind('login');
 
 // Articles blog
 $app->get('/', 'articleController:indexAction')->bind('home');
+$app->get('/admin', 'articleController:listAction');
 $app->get('/admin/article/list', 'articleController:listAction')->bind('listArticle');
 $app->get('/article/show/{id}', 'articleController:showAction')->bind('showArticle');
 $app->match('/admin/article/add', 'articleController:addAction')->bind('addArticle');
