@@ -26,15 +26,3 @@ Visit: http://portfolio.local/
 
 ### END ###
 vagrant suspend OR vagrant halt
-
-
-### Doctrine ORM ###
-
-# Create database
-php vendor/bin/doctrine orm:schema-tool:create
-
-# Update database
-php vendor/bin/doctrine orm:schema-tool:update --force
-
-# Drop database
-php vendor/bin/doctrine orm:schema-tool:drop --force
