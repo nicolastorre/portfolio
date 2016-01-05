@@ -21,13 +21,12 @@ class UserController extends DefaultController
 	 * @return mixed
 	 */
 	public function listAction(Request $request, Application $app) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$users = $this->repository['userRepository']->findAll();
 
-			return $app['twig']->render('Pages/User/List.html.twig', array(
-				'users' => $users
-			));
-		}
+		$users = $this->repository['userRepository']->findAll();
+
+		return $app['twig']->render('Pages/User/List.html.twig', array(
+			'users' => $users
+		));
 	}
 
 	/**
@@ -36,30 +35,29 @@ class UserController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function addAction(Request $request, Application $app) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$user = new user();
-			$userForm = $app['form.factory']->create(new UserForm(), $user);
-			$userForm->handleRequest($request);
-			if ($userForm->isValid()) {
-				$salt = substr(md5(time()), 0, 23);
-				$user->setSalt($salt);
-				$plainPassword = $user->getPassword();
 
-				// find the default encoder
-				$encoder = $app['security.encoder.digest'];
-				// compute the encoded password
-				$password = $encoder->encodePassword($plainPassword, $user->getSalt());
-				$user->setPassword($password);
+		$user = new user();
+		$userForm = $app['form.factory']->create(new UserForm(), $user);
+		$userForm->handleRequest($request);
+		if ($userForm->isValid()) {
+			$salt = substr(md5(time()), 0, 23);
+			$user->setSalt($salt);
+			$plainPassword = $user->getPassword();
 
-				$this->repository['userRepository']->save($user);
-				$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
-				return $app->redirect($app["url_generator"]->generate('listUser'));
-			}
-			return $app['twig']->render('Pages/User/Add.html.twig', array(
-					'title' => 'New user',
-					'userForm' => $userForm->createView())
-			);
+			// find the default encoder
+			$encoder = $app['security.encoder.digest'];
+			// compute the encoded password
+			$password = $encoder->encodePassword($plainPassword, $user->getSalt());
+			$user->setPassword($password);
+
+			$this->repository['userRepository']->save($user);
+			$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+			return $app->redirect($app["url_generator"]->generate('listUser'));
 		}
+		return $app['twig']->render('Pages/User/Add.html.twig', array(
+				'title' => 'New user',
+				'userForm' => $userForm->createView())
+		);
 	}
 
 	/**
@@ -69,51 +67,50 @@ class UserController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function editAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$user = $this->repository['userRepository']->findOneById($id);
-			$userForm = $app['form.factory']->create(new UserForm(), $user);
-			$userForm->handleRequest($request);
-			if ($userForm->isValid()) {
-				$salt = substr(md5(time()), 0, 23);
-				$user->setSalt($salt);
-				$plainPassword = $user->getPassword();
 
-				// find the default encoder
-				$encoder = $app['security.encoder.digest'];
-				// compute the encoded password
-				$password = $encoder->encodePassword($plainPassword, $user->getSalt());
-				$user->setPassword($password);
+		$user = $this->repository['userRepository']->findOneById($id);
+		$userForm = $app['form.factory']->create(new UserForm(), $user);
+		$userForm->handleRequest($request);
+		if ($userForm->isValid()) {
+			$salt = substr(md5(time()), 0, 23);
+			$user->setSalt($salt);
+			$plainPassword = $user->getPassword();
 
-				$this->repository['userRepository']->save($user);
-				$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
-				return $app->redirect($app["url_generator"]->generate('listUser'));
-			}
+			// find the default encoder
+			$encoder = $app['security.encoder.digest'];
+			// compute the encoded password
+			$password = $encoder->encodePassword($plainPassword, $user->getSalt());
+			$user->setPassword($password);
 
-			$userPasswordForm = $app['form.factory']->create(new UserPasswordForm(), $user);
-			$userPasswordForm->handleRequest($request);
-			if ($userPasswordForm->isValid()) {
-				$salt = substr(md5(time()), 0, 23);
-				$user->setSalt($salt);
-				$plainPassword = $user->getPassword();
-
-				// find the default encoder
-				$encoder = $app['security.encoder.digest'];
-				// compute the encoded password
-				$password = $encoder->encodePassword($plainPassword, $user->getSalt());
-				$user->setPassword($password);
-
-				$this->repository['userRepository']->save($user);
-				$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
-				return $app->redirect($app["url_generator"]->generate('listUser'));
-			}
-
-			return $app['twig']->render('Pages/User/Add.html.twig', array(
-					'title' => 'Edit user',
-					'userForm' => $userForm->createView(),
-					'userPasswordForm' => $userForm->createView()
-				)
-			);
+			$this->repository['userRepository']->save($user);
+			$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+			return $app->redirect($app["url_generator"]->generate('listUser'));
 		}
+
+		$userPasswordForm = $app['form.factory']->create(new UserPasswordForm(), $user);
+		$userPasswordForm->handleRequest($request);
+		if ($userPasswordForm->isValid()) {
+			$salt = substr(md5(time()), 0, 23);
+			$user->setSalt($salt);
+			$plainPassword = $user->getPassword();
+
+			// find the default encoder
+			$encoder = $app['security.encoder.digest'];
+			// compute the encoded password
+			$password = $encoder->encodePassword($plainPassword, $user->getSalt());
+			$user->setPassword($password);
+
+			$this->repository['userRepository']->save($user);
+			$app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+			return $app->redirect($app["url_generator"]->generate('listUser'));
+		}
+
+		return $app['twig']->render('Pages/User/Add.html.twig', array(
+				'title' => 'Edit user',
+				'userForm' => $userForm->createView(),
+				'userPasswordForm' => $userForm->createView()
+			)
+		);
 	}
 
 	/**
@@ -123,6 +120,7 @@ class UserController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
+
 		$deleteForm = $this->deleteForm($app, 'deleteArticle');
 		$deleteForm->handleRequest($request);
 		if ($deleteForm->isValid()) {

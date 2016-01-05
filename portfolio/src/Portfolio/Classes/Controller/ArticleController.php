@@ -16,26 +16,6 @@ use Portfolio\Classes\Controller;
  */
 class ArticleController extends DefaultController
 {
-	/**
-	 * @param Request $request
-	 * @param Form $articleForm
-	 * @return mixed
-	 * @throws \Exception
-	 */
-	private function upload(Request $request, Form $articleForm) {
-		$files = $request->files->get($articleForm->getName());
-		$path = __DIR__.self::UPLOAD_DIR;
-		$filename = $files['image']->getClientOriginalName();
-		$filepath = $path.$filename;
-		$files['image']->move($path,$filename);
-		chmod($filepath, 0755);
-
-		Image::open($filepath)
-			->zoomCrop(900, 300,"#346A85","center","center")
-			->save($filepath);
-
-		return $filename;
-	}
 
 	/**
 	 * @param Request $request
@@ -57,13 +37,11 @@ class ArticleController extends DefaultController
 	 */
 	public function listAction(Request $request, Application $app) {
 
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$articles = $this->repository['articleRepository']->findAll();
+		$articles = $this->repository['articleRepository']->findAll();
 
-			return $app['twig']->render('Pages/Article/List.html.twig', array(
-				'articles' => $articles
-			));
-		}
+		return $app['twig']->render('Pages/Article/List.html.twig', array(
+			'articles' => $articles
+		));
 	}
 
 	/**
@@ -72,25 +50,24 @@ class ArticleController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function addAction(Request $request, Application $app) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$user = $app['security']->getToken()->getUser();
-			$article = new Article();
-			$article->setAuthor($user->getId());
-			$articleForm = $app['form.factory']->create(new ArticleForm(), $article);
-			$articleForm->handleRequest($request);
-			if ($articleForm->isValid()) {
-				$filename = $this->upload($request, $articleForm);
-				$article->setImage($filename);
 
-				$this->repository['articleRepository']->save($article);
-				$app['session']->getFlashBag()->add('success', 'The article was successfully created.');
-				return $app->redirect('/admin/article/list');
-			}
-			return $app['twig']->render('Pages/Article/Add.html.twig', array(
-					'title' => 'New article',
-					'articleForm' => $articleForm->createView())
-			);
+		$user = $app['security']->getToken()->getUser();
+		$article = new Article();
+		$article->setAuthor($user->getId());
+		$articleForm = $app['form.factory']->create(new ArticleForm(), $article);
+		$articleForm->handleRequest($request);
+		if ($articleForm->isValid()) {
+			$filename = $this->upload($request, $articleForm);
+			$article->setImage($filename);
+
+			$this->repository['articleRepository']->save($article);
+			$app['session']->getFlashBag()->add('success', 'The article was successfully created.');
+			return $app->redirect('/admin/article/list');
 		}
+		return $app['twig']->render('Pages/Article/Add.html.twig', array(
+				'title' => 'New article',
+				'articleForm' => $articleForm->createView())
+		);
 	}
 
 	/**
@@ -100,6 +77,7 @@ class ArticleController extends DefaultController
 	 * @return mixed
 	 */
 	public function showAction(Request $request, Application $app, $id) {
+
 		$article = $this->repository['articleRepository']->findOneById($id);
 
 		return $app['twig']->render('Pages/Article/Show.html.twig', array(
@@ -114,26 +92,25 @@ class ArticleController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function editAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$article = $this->repository['articleRepository']->findOneById($id);
-			$articleForm = $app['form.factory']->create(new ArticleForm(), $article);
-			$articleForm->handleRequest($request);
-			if ($articleForm->isValid()) {
-				if($article->getImage() !== NULL) {
-					$filename = $this->upload($request, $articleForm);
-					$article->setImage($filename);
-				}
 
-				$this->repository['articleRepository']->save($article);
-				$app['session']->getFlashBag()->add('success', 'The article was successfully updated.');
-
-				return $app->redirect('/admin/article/list');
+		$article = $this->repository['articleRepository']->findOneById($id);
+		$articleForm = $app['form.factory']->create(new ArticleForm(), $article);
+		$articleForm->handleRequest($request);
+		if ($articleForm->isValid()) {
+			if($article->getImage() !== NULL) {
+				$filename = $this->upload($request, $articleForm);
+				$article->setImage($filename);
 			}
-			return $app['twig']->render('Pages/Article/Add.html.twig', array(
-					'title' => 'Edit article',
-					'articleForm' => $articleForm->createView())
-			);
+
+			$this->repository['articleRepository']->save($article);
+			$app['session']->getFlashBag()->add('success', 'The article was successfully updated.');
+
+			return $app->redirect('/admin/article/list');
 		}
+		return $app['twig']->render('Pages/Article/Add.html.twig', array(
+				'title' => 'Edit article',
+				'articleForm' => $articleForm->createView())
+		);
 	}
 
 	/**
@@ -143,6 +120,7 @@ class ArticleController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app) {
+
 		$deleteForm = $this->deleteForm($app, 'deleteArticle');
 		$deleteForm->handleRequest($request);
 		if ($deleteForm->isValid()) {

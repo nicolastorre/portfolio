@@ -22,21 +22,20 @@ class InterestController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function addAction(Request $request, Application $app, $idbio) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$interest = new Interest();
-			$interest->setBio($idbio);
-			$interestForm = $app['form.factory']->create(new InterestForm(), $interest);
-			$interestForm->handleRequest($request);
-			if ($interestForm->isValid()) {
-				$this->repository['interestRepository']->save($interest);
-				$app['session']->getFlashBag()->add('success', 'The interest was successfully created.');
-				return $app->redirect('/admin/bio/list');
-			}
-			return $app['twig']->render('Pages/Interest/Add.html.twig', array(
-					'title' => 'New interest',
-					'interestForm' => $interestForm->createView())
-			);
+
+		$interest = new Interest();
+		$interest->setBio($idbio);
+		$interestForm = $app['form.factory']->create(new InterestForm(), $interest);
+		$interestForm->handleRequest($request);
+		if ($interestForm->isValid()) {
+			$this->repository['interestRepository']->save($interest);
+			$app['session']->getFlashBag()->add('success', 'The interest was successfully created.');
+			return $app->redirect('/admin/bio/list');
 		}
+		return $app['twig']->render('Pages/Interest/Add.html.twig', array(
+				'title' => 'New interest',
+				'interestForm' => $interestForm->createView())
+		);
 	}
 
 	/**
@@ -46,20 +45,19 @@ class InterestController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function editAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$interest = $this->repository['interestRepository']->findOneById($id);
-			$interestForm = $app['form.factory']->create(new InterestForm(), $interest);
-			$interestForm->handleRequest($request);
-			if ($interestForm->isValid()) {
-				$this->repository['interestRepository']->save($interest);
-				$app['session']->getFlashBag()->add('success', 'The interest was successfully created.');
-				return $app->redirect('/admin/bio/list');
-			}
-			return $app['twig']->render('Pages/Interest/Add.html.twig', array(
-					'title' => 'Edit interest',
-					'interestForm' => $interestForm->createView())
-			);
+
+		$interest = $this->repository['interestRepository']->findOneById($id);
+		$interestForm = $app['form.factory']->create(new InterestForm(), $interest);
+		$interestForm->handleRequest($request);
+		if ($interestForm->isValid()) {
+			$this->repository['interestRepository']->save($interest);
+			$app['session']->getFlashBag()->add('success', 'The interest was successfully created.');
+			return $app->redirect('/admin/bio/list');
 		}
+		return $app['twig']->render('Pages/Interest/Add.html.twig', array(
+				'title' => 'Edit interest',
+				'interestForm' => $interestForm->createView())
+		);
 	}
 
 	/**
@@ -69,6 +67,7 @@ class InterestController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
+
 		$deleteForm = $this->deleteForm($app, 'deleteArticle');
 		$deleteForm->handleRequest($request);
 		if ($deleteForm->isValid()) {

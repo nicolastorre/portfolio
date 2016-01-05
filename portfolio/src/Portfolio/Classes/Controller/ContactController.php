@@ -20,6 +20,7 @@ class ContactController extends DefaultController
 	 * @return mixed
 	 */
 	public function listAction(Request $request, Application $app) {
+
 		$contacts = $this->repository['contactRepository']->findAll();
 
 		return $app['twig']->render('Pages/Contact/List.html.twig', array(
@@ -33,6 +34,7 @@ class ContactController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function addAction(Request $request, Application $app) {
+
 		$contact = new contact();
 		$contactForm = $app['form.factory']->create(new ContactForm(), $contact);
 		$contactForm->handleRequest($request);
@@ -55,6 +57,7 @@ class ContactController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
+
 		$deleteForm = $this->deleteForm($app, 'deleteArticle');
 		$deleteForm->handleRequest($request);
 		if ($deleteForm->isValid()) {

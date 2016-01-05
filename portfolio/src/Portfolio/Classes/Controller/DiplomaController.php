@@ -22,21 +22,20 @@ class DiplomaController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function addAction(Request $request, Application $app, $idbio) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$diploma = new Diploma();
-			$diploma->setBio($idbio);
-			$diplomaForm = $app['form.factory']->create(new DiplomaForm(), $diploma);
-			$diplomaForm->handleRequest($request);
-			if ($diplomaForm->isValid()) {
-				$this->repository['diplomaRepository']->save($diploma);
-				$app['session']->getFlashBag()->add('success', 'The diploma was successfully created.');
-				return $app->redirect('/admin/bio/list');
-			}
-			return $app['twig']->render('Pages/Diploma/Add.html.twig', array(
-					'title' => 'New diploma',
-					'diplomaForm' => $diplomaForm->createView())
-			);
+
+		$diploma = new Diploma();
+		$diploma->setBio($idbio);
+		$diplomaForm = $app['form.factory']->create(new DiplomaForm(), $diploma);
+		$diplomaForm->handleRequest($request);
+		if ($diplomaForm->isValid()) {
+			$this->repository['diplomaRepository']->save($diploma);
+			$app['session']->getFlashBag()->add('success', 'The diploma was successfully created.');
+			return $app->redirect('/admin/bio/list');
 		}
+		return $app['twig']->render('Pages/Diploma/Add.html.twig', array(
+				'title' => 'New diploma',
+				'diplomaForm' => $diplomaForm->createView())
+		);
 	}
 
 	/**
@@ -46,20 +45,19 @@ class DiplomaController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function editAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$diploma = $this->repository['diplomaRepository']->findOneById($id);
-			$diplomaForm = $app['form.factory']->create(new DiplomaForm(), $diploma);
-			$diplomaForm->handleRequest($request);
-			if ($diplomaForm->isValid()) {
-				$this->repository['diplomaRepository']->save($diploma);
-				$app['session']->getFlashBag()->add('success', 'The diploma was successfully created.');
-				return $app->redirect('/admin/bio/list');
-			}
-			return $app['twig']->render('Pages/Diploma/Add.html.twig', array(
-					'title' => 'Edit diploma',
-					'diplomaForm' => $diplomaForm->createView())
-			);
+
+		$diploma = $this->repository['diplomaRepository']->findOneById($id);
+		$diplomaForm = $app['form.factory']->create(new DiplomaForm(), $diploma);
+		$diplomaForm->handleRequest($request);
+		if ($diplomaForm->isValid()) {
+			$this->repository['diplomaRepository']->save($diploma);
+			$app['session']->getFlashBag()->add('success', 'The diploma was successfully created.');
+			return $app->redirect('/admin/bio/list');
 		}
+		return $app['twig']->render('Pages/Diploma/Add.html.twig', array(
+				'title' => 'Edit diploma',
+				'diplomaForm' => $diplomaForm->createView())
+		);
 	}
 
 	/**
@@ -69,6 +67,7 @@ class DiplomaController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
+
 		$deleteForm = $this->deleteForm($app, 'deleteArticle');
 		$deleteForm->handleRequest($request);
 		if ($deleteForm->isValid()) {

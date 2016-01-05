@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Portfolio\Domain\Model\Article;
 use Portfolio\Classes\Form\ArticleForm;
+use Symfony\Component\Form\Form;
+use Gregwar\Image\Image;
 
 /**
  * Class DefaultController
@@ -35,6 +37,31 @@ class DefaultController
 	public function __construct(Array $repository = array()) {
 		$this->repository = $repository;
 
+	}
+
+	/**
+	 * @param Request $request
+	 * @param Form $articleForm
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	protected function upload(Request $request, Form $form) {
+		$files = $request->files->get($form->getName());
+		if(!empty($files)) {
+			$path = __DIR__ . self::UPLOAD_DIR;
+			$filename = $files['image']->getClientOriginalName();
+			$filepath = $path . $filename;
+			$files['image']->move($path, $filename);
+			chmod($filepath, 0755);
+
+			Image::open($filepath)
+				->zoomCrop(900, 300, "#346A85", "center", "center")
+				->save($filepath);
+
+			return $filename;
+		} else {
+			return '';
+		}
 	}
 
 	public function checkAuthenticatedUser(Application $app) {

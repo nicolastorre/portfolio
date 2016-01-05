@@ -22,21 +22,20 @@ class ExpController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function addAction(Request $request, Application $app, $idbio) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$exp = new exp();
-			$exp->setBio($idbio);
-			$expForm = $app['form.factory']->create(new ExpForm(), $exp);
-			$expForm->handleRequest($request);
-			if ($expForm->isValid()) {
-				$app['expRepository']->save($exp);
-				$app['session']->getFlashBag()->add('success', 'The exp was successfully created.');
-				return $app->redirect('/admin/bio/list');
-			}
-			return $app['twig']->render('Pages/Exp/Add.html.twig', array(
-					'title' => 'New exp',
-					'expForm' => $expForm->createView())
-			);
+
+		$exp = new exp();
+		$exp->setBio($idbio);
+		$expForm = $app['form.factory']->create(new ExpForm(), $exp);
+		$expForm->handleRequest($request);
+		if ($expForm->isValid()) {
+			$app['expRepository']->save($exp);
+			$app['session']->getFlashBag()->add('success', 'The exp was successfully created.');
+			return $app->redirect('/admin/bio/list');
 		}
+		return $app['twig']->render('Pages/Exp/Add.html.twig', array(
+				'title' => 'New exp',
+				'expForm' => $expForm->createView())
+		);
 	}
 
 	/**
@@ -46,20 +45,19 @@ class ExpController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function editAction(Request $request, Application $app, $id) {
-		if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-			$exp = $app['expRepository']->findOneById($id);
-			$expForm = $app['form.factory']->create(new ExpForm(), $exp);
-			$expForm->handleRequest($request);
-			if ($expForm->isValid()) {
-				$app['expRepository']->save($exp);
-				$app['session']->getFlashBag()->add('success', 'The exp was successfully created.');
-				return $app->redirect('/admin/bio/list');
-			}
-			return $app['twig']->render('Pages/Exp/Add.html.twig', array(
-					'title' => 'Edit exp',
-					'expForm' => $expForm->createView())
-			);
+
+		$exp = $app['expRepository']->findOneById($id);
+		$expForm = $app['form.factory']->create(new ExpForm(), $exp);
+		$expForm->handleRequest($request);
+		if ($expForm->isValid()) {
+			$app['expRepository']->save($exp);
+			$app['session']->getFlashBag()->add('success', 'The exp was successfully created.');
+			return $app->redirect('/admin/bio/list');
 		}
+		return $app['twig']->render('Pages/Exp/Add.html.twig', array(
+				'title' => 'Edit exp',
+				'expForm' => $expForm->createView())
+		);
 	}
 
 	/**
@@ -69,6 +67,7 @@ class ExpController extends DefaultController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
+
 		$deleteForm = $this->deleteForm($app, 'deleteArticle');
 		$deleteForm->handleRequest($request);
 		if ($deleteForm->isValid()) {
