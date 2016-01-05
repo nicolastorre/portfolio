@@ -53,6 +53,10 @@ class BioController extends DefaultController
 	 */
 	public function addAction(Request $request, Application $app) {
 
+		if(count($this->repository['bioRepository']->findAll()) > 0) {
+			throw new AccessDeniedException();
+		}
+
 		$bio = new Bio();
 		$bioForm = $app['form.factory']->create(new BioForm(), $bio);
 		$bioForm->handleRequest($request);
@@ -65,7 +69,7 @@ class BioController extends DefaultController
 			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Bio/Add.html.twig', array(
-				'title' => 'New diploma',
+				'title' => 'New bio',
 				'bioForm' => $bioForm->createView())
 		);
 	}
