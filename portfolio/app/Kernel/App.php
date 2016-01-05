@@ -194,7 +194,7 @@ $app->boot();
 
 $app['twig']->addGlobal('links', array(
 	'email' => "#",
-	'linkedin' => "#",
+	'linkedin' => "https://fr.linkedin.com/in/nicotorre",
 	'twitter' => "https://twitter.com/nicowez",
 	'github' => "https://github.com/nicolastorre"
 ));
