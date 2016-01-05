@@ -12,7 +12,8 @@
                         <hr>
                         {% if article.image %}
                             <img class="img-responsive" src="upload/{{ article.image }}" alt=""> <!--http://placehold.it/900x300-->
-                        {% endif %}                        <hr>
+                        {% endif %}
+                        <hr>
                         <p class="lead text-justify">{{ article.content|raw }}</p>
 
                         {% include 'Partials/Article/ShareSocialNetwork.html.twig' %}
