@@ -47,7 +47,7 @@ class DefaultController
 	 */
 	protected function upload(Request $request, Form $form) {
 		$files = $request->files->get($form->getName());
-		if(!empty($files)) {
+		if(!empty($files['image'])) {
 			$path = __DIR__ . self::UPLOAD_DIR;
 			$filename = $files['image']->getClientOriginalName();
 			$filepath = $path . $filename;
