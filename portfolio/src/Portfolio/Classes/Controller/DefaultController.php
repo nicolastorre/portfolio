@@ -5,6 +5,7 @@ namespace Portfolio\Classes\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Portfolio\Domain\Model\Article;
 use Portfolio\Classes\Form\ArticleForm;
 use Symfony\Component\Form\Form;
@@ -40,6 +41,13 @@ class DefaultController
 	}
 
 	// @ToDo delete image method with unlink function
+	protected function deleteFile($filename) {
+		$path = __DIR__ . self::UPLOAD_DIR;
+		$filepath = $path . $filename;
+		chmod($filepath, 0755);
+		@unlink($filepath);
+		return TRUE;
+	}
 
 	/**
 	 * @param Request $request
@@ -62,7 +70,7 @@ class DefaultController
 
 			return $filename;
 		} else {
-			return '';
+			return false;
 		}
 	}
 

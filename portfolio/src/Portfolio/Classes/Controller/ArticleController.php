@@ -94,12 +94,15 @@ class ArticleController extends DefaultController
 	public function editAction(Request $request, Application $app, $id) {
 
 		$article = $this->repository['articleRepository']->findOneById($id);
+		$oldImage = $article->getImage();
 		$articleForm = $app['form.factory']->create(new ArticleForm(), $article);
 		$articleForm->handleRequest($request);
 		if ($articleForm->isValid()) {
-			if($article->getImage() !== NULL) {
-				$filename = $this->upload($request, $articleForm);
+			$filename = $this->upload($request, $articleForm);
+			if(false !== $filename) {
 				$article->setImage($filename);
+			} else {
+				$article->setImage($oldImage);
 			}
 
 			$this->repository['articleRepository']->save($article);
@@ -125,7 +128,9 @@ class ArticleController extends DefaultController
 		$deleteForm->handleRequest($request);
 		if ($deleteForm->isValid()) {
 			$data = $deleteForm->getData();
-			$this->repository['articleRepository']->delete($data['id']);
+			$article = $this->repository['articleRepository']->findOneById($data['id']);
+			$this->repository['articleRepository']->delete($article->getId());
+			$this->deleteFile($article->getImage());
 			$app['session']->getFlashBag()->add('success', 'The article was succesfully removed.');
 			return $app->redirect('/admin/article/list');
 		}

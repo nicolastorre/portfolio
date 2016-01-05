@@ -7,6 +7,28 @@
 
         {{ form_start(bioForm, { 'attr': {'class': 'form-horizontal'} }) }}
         <div class="form-group">
+            {{ form_label(bioForm.firstname, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(bioForm.firstname) }}
+                {{ form_widget(bioForm.firstname, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(bioForm.lastname, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(bioForm.lastname) }}
+                {{ form_widget(bioForm.lastname, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
             {{ form_label(bioForm.image, NULL, { 'label_attr':  {
                 'class': 'col-sm-4 control-label'
             }}) }}

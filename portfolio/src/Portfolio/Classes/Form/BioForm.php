@@ -17,8 +17,8 @@ class BioForm extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName')
-			->add('lastName')
+			->add('firstname')
+			->add('lastname')
 			->add('presentation','textarea')
 			->add('image', 'file',array(
 				'data_class' => null,

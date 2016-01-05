@@ -79,12 +79,15 @@ class BioController extends DefaultController
 	public function editAction(Request $request, Application $app, $id) {
 
 		$bio = $this->repository['bioRepository']->findOneById($id);
+		$oldImage = $bio->getImage();
 		$bioForm = $app['form.factory']->create(new BioForm(), $bio);
 		$bioForm->handleRequest($request);
 		if ($bioForm->isValid()) {
-			if($bio->getImage() !== NULL) {
-				$filename = $this->upload($request, $bioForm);
+			$filename = $this->upload($request, $bioForm);
+			if(false !== $filename) {
 				$bio->setImage($filename);
+			} else {
+				$bio->setImage($oldImage);
 			}
 
 			$this->repository['bioRepository']->save($bio);
@@ -105,14 +108,7 @@ class BioController extends DefaultController
 	 */
 	public function deleteAction(Request $request, Application $app, $id) {
 
-		$deleteForm = $this->deleteForm($app, 'deleteArticle');
-		$deleteForm->handleRequest($request);
-		if ($deleteForm->isValid()) {
-			$data = $deleteForm->getData();
-			$this->repository['bioRepository']->delete($data['id']);
-			$app['session']->getFlashBag()->add('success', 'The bio was successfully removed.');
-			return $app->redirect('/admin/bio/list');
-		}
+		throw new AccessDeniedException();
 	}
 
 }
