@@ -30,7 +30,7 @@ class SkillController extends DefaultController
 		if ($skillForm->isValid()) {
 			$this->repository['skillRepository']->save($skill);
 			$app['session']->getFlashBag()->add('success', 'The skill was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Skill/Add.html.twig', array(
 				'title' => 'New skill',
@@ -52,7 +52,7 @@ class SkillController extends DefaultController
 		if ($skillForm->isValid()) {
 			$this->repository['skillRepository']->save($skill);
 			$app['session']->getFlashBag()->add('success', 'The skill was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Skill/Add.html.twig', array(
 				'title' => 'Edit skill',
@@ -74,7 +74,7 @@ class SkillController extends DefaultController
 			$data = $deleteForm->getData();
 			$this->repository['skillRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The skill was successfully removed.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 	}
 

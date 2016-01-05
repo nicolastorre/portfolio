@@ -30,7 +30,7 @@ class ExpController extends DefaultController
 		if ($expForm->isValid()) {
 			$app['expRepository']->save($exp);
 			$app['session']->getFlashBag()->add('success', 'The exp was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Exp/Add.html.twig', array(
 				'title' => 'New exp',
@@ -52,7 +52,7 @@ class ExpController extends DefaultController
 		if ($expForm->isValid()) {
 			$app['expRepository']->save($exp);
 			$app['session']->getFlashBag()->add('success', 'The exp was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Exp/Add.html.twig', array(
 				'title' => 'Edit exp',
@@ -74,7 +74,7 @@ class ExpController extends DefaultController
 			$data = $deleteForm->getData();
 			$app['expRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The exp was successfully removed.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 	}
 

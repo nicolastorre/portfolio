@@ -62,7 +62,7 @@ class BioController extends DefaultController
 
 			$this->repository['bioRepository']->save($bio);
 			$app['session']->getFlashBag()->add('success', 'The bio was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Bio/Add.html.twig', array(
 				'title' => 'New diploma',
@@ -93,7 +93,7 @@ class BioController extends DefaultController
 
 			$this->repository['bioRepository']->save($bio);
 			$app['session']->getFlashBag()->add('success', 'The bio was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Bio/Add.html.twig', array(
 				'title' => 'Edit bio',

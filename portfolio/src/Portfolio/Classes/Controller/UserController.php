@@ -132,7 +132,7 @@ class UserController extends DefaultController
 			}
 			$this->repository['userRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The user was successfully removed.');
-			return $app->redirect('/admin/user/list');
+			return $app->redirect($app["url_generator"]->generate('listUser'));
 		}
 	}
 

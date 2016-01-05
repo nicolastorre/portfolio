@@ -30,7 +30,7 @@ class DiplomaController extends DefaultController
 		if ($diplomaForm->isValid()) {
 			$this->repository['diplomaRepository']->save($diploma);
 			$app['session']->getFlashBag()->add('success', 'The diploma was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Diploma/Add.html.twig', array(
 				'title' => 'New diploma',
@@ -52,7 +52,7 @@ class DiplomaController extends DefaultController
 		if ($diplomaForm->isValid()) {
 			$this->repository['diplomaRepository']->save($diploma);
 			$app['session']->getFlashBag()->add('success', 'The diploma was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Diploma/Add.html.twig', array(
 				'title' => 'Edit diploma',
@@ -74,7 +74,7 @@ class DiplomaController extends DefaultController
 			$data = $deleteForm->getData();
 			$this->repository['diplomaRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The diploma was successfully removed.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 	}
 

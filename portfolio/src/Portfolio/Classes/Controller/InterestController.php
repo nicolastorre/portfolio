@@ -30,7 +30,7 @@ class InterestController extends DefaultController
 		if ($interestForm->isValid()) {
 			$this->repository['interestRepository']->save($interest);
 			$app['session']->getFlashBag()->add('success', 'The interest was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Interest/Add.html.twig', array(
 				'title' => 'New interest',
@@ -52,7 +52,7 @@ class InterestController extends DefaultController
 		if ($interestForm->isValid()) {
 			$this->repository['interestRepository']->save($interest);
 			$app['session']->getFlashBag()->add('success', 'The interest was successfully created.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 		return $app['twig']->render('Pages/Interest/Add.html.twig', array(
 				'title' => 'Edit interest',
@@ -74,7 +74,7 @@ class InterestController extends DefaultController
 			$data = $deleteForm->getData();
 			$this->repository['interestRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The interest was successfully removed.');
-			return $app->redirect('/admin/bio/list');
+			return $app->redirect($app["url_generator"]->generate('listBio'));
 		}
 	}
 

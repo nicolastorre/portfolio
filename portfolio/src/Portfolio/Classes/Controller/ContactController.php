@@ -42,7 +42,7 @@ class ContactController extends DefaultController
 			$this->repository['contactRepository']->save($contact);
 			// mail('contact@nicolas-torre.com', 'Feedback', $contact->getMessage());
 			$app['session']->getFlashBag()->add('success', 'Votre message a été envoyé avec succès!');
-			return $app->redirect('/contact/add');
+			return $app->redirect($app["url_generator"]->generate('addContact'));
 		}
 		return $app['twig']->render('Pages/Contact/Add.html.twig', array(
 				'title' => 'Me contacter',
@@ -64,7 +64,7 @@ class ContactController extends DefaultController
 			$data = $deleteForm->getData();
 			$this->repository['contactRepository']->delete($data['id']);
 			$app['session']->getFlashBag()->add('success', 'The contact was successfully removed.');
-			return $app->redirect('/admin/contact/list');
+			return $app->redirect($app["url_generator"]->generate('listContact'));
 		}
 	}
 

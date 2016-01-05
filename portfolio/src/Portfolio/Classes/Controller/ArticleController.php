@@ -62,7 +62,7 @@ class ArticleController extends DefaultController
 
 			$this->repository['articleRepository']->save($article);
 			$app['session']->getFlashBag()->add('success', 'The article was successfully created.');
-			return $app->redirect('/admin/article/list');
+			return $app->redirect($app["url_generator"]->generate('listArticle'));
 		}
 		return $app['twig']->render('Pages/Article/Add.html.twig', array(
 				'title' => 'New article',
@@ -109,7 +109,7 @@ class ArticleController extends DefaultController
 			$this->repository['articleRepository']->save($article);
 			$app['session']->getFlashBag()->add('success', 'The article was successfully updated.');
 
-			return $app->redirect('/admin/article/list');
+			return $app->redirect($app["url_generator"]->generate('listArticle'));
 		}
 		return $app['twig']->render('Pages/Article/Add.html.twig', array(
 				'title' => 'Edit article',
@@ -133,7 +133,7 @@ class ArticleController extends DefaultController
 			$this->repository['articleRepository']->delete($article->getId());
 			$this->deleteFile($article->getImage());
 			$app['session']->getFlashBag()->add('success', 'The article was succesfully removed.');
-			return $app->redirect('/admin/article/list');
+			return $app->redirect($app["url_generator"]->generate('listArticle'));
 		}
 	}
 }
