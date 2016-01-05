@@ -64,6 +64,8 @@ class DefaultController
 			$files['image']->move($path, $filename);
 			chmod($filepath, 0755);
 
+			//ToDo: renommer les images en ajoutant uniqid()
+
 			Image::open($filepath)
 				->zoomCrop($width, $height, "#346A85", "center", "center")
 				->save($filepath);
