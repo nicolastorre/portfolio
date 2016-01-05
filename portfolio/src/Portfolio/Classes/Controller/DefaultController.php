@@ -39,6 +39,8 @@ class DefaultController
 
 	}
 
+	// @ToDo delete image method with unlink function
+
 	/**
 	 * @param Request $request
 	 * @param Form $articleForm
