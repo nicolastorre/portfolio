@@ -56,7 +56,7 @@ class ContactController extends DefaultController
 	 * @param $id
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function deleteAction(Request $request, Application $app, $id) {
+	public function deleteAction(Request $request, Application $app) {
 
 		$deleteForm = $this->deleteForm($app, 'deleteArticle');
 		$deleteForm->handleRequest($request);
