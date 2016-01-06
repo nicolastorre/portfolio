@@ -29,10 +29,10 @@ class BioRepository extends Repository
 		$bio->setPresentation($row['presentation']);
 		$bio->setImage($row['image']);
 
-		$diplomas = $this->repository['diplomaRepository']->findByBio($bio->getId());
+		$diplomas = $this->repository['diplomaRepository']->findByBioOrderByDate($bio->getId());
 		$bio->setDiploma($diplomas);
 
-		$exps = $this->repository['expRepository']->findByBio($bio->getId());
+		$exps = $this->repository['expRepository']->findByBioOrderByDate($bio->getId());
 		$bio->setExp($exps);
 
 		$skills = $this->repository['skillRepository']->findByBio($bio->getId());
