@@ -13,19 +13,16 @@ h1.construction
 }
 
 
-html,
-body {
-    height: 100%;
+html{
+    position: relative;
+    min-height: 100%;
     /* The html and body elements cannot have any padding or margin. */
 }
 
 /* Wrapper for page content to push down footer */
-#wrap {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-    margin: 0 auto -200px;
+.wrap {
+    padding-top: 70px;
+    padding-bottom: 30px;
 }
 
 body
@@ -33,6 +30,7 @@ body
     background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
+    margin-bottom: 200px;
 }
 
 .sidebar
@@ -42,7 +40,6 @@ body
 
 .main
 {
-    padding-top: 70px;
 }
 
 /* sidebar */

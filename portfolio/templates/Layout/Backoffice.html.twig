@@ -30,27 +30,29 @@
 </head>
 <body>
 
-{% include 'Partials/Elements/MenuBO.html.twig' %}
+    {% include 'Partials/Elements/MenuBO.html.twig' %}
 
-<div class="main">
+    <div class="wrap">
+        <div class="main">
 
-    {% for flashMessage in app.session.flashbag.get('success') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {#
+                {% for key, flash in app.session.getFlashes() %}
+                    <div class="errors">
+                        {{ flash }}
+                    </div>
+                {% endfor %}
+            #}
+
+            {% block content %}{% endblock %}
         </div>
-    {% endfor %}
-    {#
-        {% for key, flash in app.session.getFlashes() %}
-            <div class="errors">
-                {{ flash }}
-            </div>
-        {% endfor %}
-    #}
+    </div>
 
-    {% block content %}{% endblock %}
-</div>
-
-{% include 'Partials/Elements/Footer.html.twig' %}
+    {% include 'Partials/Elements/Footer.html.twig' %}
 
 </body>
 </html>

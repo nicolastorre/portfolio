@@ -19,29 +19,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
 
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+        $(document).ready(function() {
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
 
 </head>
 <body>
 
-{% include 'Partials/Elements/Menu.html.twig' %}
+    {% include 'Partials/Elements/Menu.html.twig' %}
 
-<div class="main">
+    <div class="wrap">
+        <div class="main">
 
-    {#<h1 class="construction">Site en construction</h1>#}
+        {#<h1 class="construction">Site en construction</h1>#}
 
-    {% for flashMessage in app.session.flashbag.get('success') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {#<div class="construction"></div>#}
+
+        {% block content %}{% endblock %}
         </div>
-    {% endfor %}
+    </div>
 
-    {#<div class="construction"></div>#}
-
-    {% block content %}{% endblock %}
-</div>
-
-{% include 'Partials/Elements/Footer.html.twig' %}
+    {% include 'Partials/Elements/Footer.html.twig' %}
 
 </body>
 </html>
