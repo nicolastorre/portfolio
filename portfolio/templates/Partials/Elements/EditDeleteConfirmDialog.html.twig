@@ -3,9 +3,9 @@
 {% if objectName != 'Contact' %}
     <a href="{{ path("edit#{objectName}", { 'id': ObjId }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
 {% endif %}
-<button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#articleDialog{{ ObjId }}"><span class="glyphicon glyphicon-remove"></span>
+<button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#{{ objectName }}Dialog{{ ObjId }}"><span class="glyphicon glyphicon-remove"></span>
 </button>
-<div class="modal fade" id="articleDialog{{ ObjId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{ objectName }}Dialog{{ ObjId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
