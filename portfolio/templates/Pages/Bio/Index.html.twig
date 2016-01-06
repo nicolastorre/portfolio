@@ -6,22 +6,6 @@
             {% include 'Partials/Elements/Sidebar/Bio.html.twig' %}
 
             <div class="col-lg-8">
-                <div class="well diploma">
-                    <h4>Diplômes</h4>
-                    {% for diploma in bio.diploma %}
-                        <div class="diploma-item">
-                            <div class="row">
-                                <div class="col-sm-4"><p>{{ diploma.startDate|date("d/m/Y") }} - {{ diploma.endDate|date("d/m/Y") }}</p></div>
-                                <div class="col-sm-8 "><h4>{{ diploma.title }}</h4></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8 col-sm-offset-4">
-                                    <p>{{ diploma.description }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
                 <div class="well exp">
                     <h4>Expériences professionnelles</h4>
                     {% for exp in bio.exp %}
@@ -33,6 +17,22 @@
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-4">
                                     <p>{{ exp.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="well diploma">
+                    <h4>Diplômes</h4>
+                    {% for diploma in bio.diploma %}
+                        <div class="diploma-item">
+                            <div class="row">
+                                <div class="col-sm-4"><p>{{ diploma.startDate|date("d/m/Y") }} - {{ diploma.endDate|date("d/m/Y") }}</p></div>
+                                <div class="col-sm-8 "><h4>{{ diploma.title }}</h4></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8 col-sm-offset-4">
+                                    <p>{{ diploma.description }}</p>
                                 </div>
                             </div>
                         </div>
