@@ -16,7 +16,7 @@
                     <tr>
                         <td>{{ diploma.startDate | date("Y-m-d") }}</td>
                         <td>{{ diploma.endDate | date("Y-m-d") }}</td>
-                        <td><a class="articleTitle" href="#">{{ diploma.title }}</a></td>
+                        <td>{{ diploma.title }}</td>
                         <td>
                             {% include 'Partials/Elements/EditDeleteConfirmDialog.html.twig' with {objectName: 'Diploma', object: diploma, attr: 'id'}  %}
                         </td>
