@@ -67,7 +67,7 @@
         {{ form_end(articleForm) }}
     </div>
     <script>
-        $('#article_image input').fileinput({showUpload: false});
+        $('#article_image').fileinput({showUpload: false});
         $('.selectpicker *').selectpicker();
         tinymce.init({
             selector: "#article_content",
