@@ -16,7 +16,7 @@ class ArticleRepository extends Repository
 	 * @param $i
 	 */
 	public function findLast($n = 3) {
-		$sql = "select * from ".$this->tableName." order by publishedDate desc limit $n";
+		$sql = "select * from ".$this->tableName." where published = 1 order by publishedDate desc limit $n";
 		$result = $this->db->fetchAll($sql);
 
 		// Convert query result to an array of objects
