@@ -25,7 +25,8 @@ class DiplomaForm extends AbstractType
 				),
 				'format' => 'dd MM yyyy',
 				'pattern' => '{{ day }} {{ month }} {{ year }}',
-				'years' => range(Date('Y'), 2005)
+				'years' => range(Date('Y'), 2005),
+				'data' => \Date('U')
 			))
 			->add('endDate', 'date', array(
 				'input'  => 'timestamp',
@@ -35,7 +36,8 @@ class DiplomaForm extends AbstractType
 				),
 				'format' => 'dd MM yyyy',
 				'pattern' => '{{ day }} {{ month }} {{ year }}',
-				'years' => range(Date('Y'), 2005)
+				'years' => range(Date('Y'), 2005),
+				'data' => \Date('U')
 			))
 			->add('title')
 			->add('description','textarea')
