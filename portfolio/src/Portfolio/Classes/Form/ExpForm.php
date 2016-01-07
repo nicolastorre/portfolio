@@ -20,18 +20,22 @@ class ExpForm extends AbstractType
 			->add('startDate', 'date', array(
 				'input'  => 'timestamp',
 				'widget' => 'choice',
-				'years' => range(2005,2020),
 				'attr' => array(
 					'class' => 'selectpicker'
-				)
+				),
+				'format' => 'dd MM yyyy',
+				'pattern' => '{{ day }} {{ month }} {{ year }}',
+				'years' => range(Date('Y'), 2005)
 			))
 			->add('endDate', 'date', array(
 				'input'  => 'timestamp',
 				'widget' => 'choice',
-				'years' => range(2005,2020),
 				'attr' => array(
 					'class' => 'selectpicker'
-				)
+				),
+				'format' => 'dd MM yyyy',
+				'pattern' => '{{ day }} {{ month }} {{ year }}',
+				'years' => range(Date('Y'), 2005)
 			))
 			->add('title')
 			->add('description','textarea')

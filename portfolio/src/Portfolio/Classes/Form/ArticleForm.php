@@ -24,7 +24,11 @@ class ArticleForm extends AbstractType
 				'widget' => 'choice',
 				'attr' => array(
 					'class' => 'selectpicker'
-				)
+				),
+				'format' => 'dd MM yyyy',
+				'pattern' => '{{ day }} {{ month }} {{ year }}',
+				'years' => range(Date('Y'), 2005),
+				'data' => \Date('U')
 			))
 			->add('image', 'file',array(
 				'data_class' => null,
