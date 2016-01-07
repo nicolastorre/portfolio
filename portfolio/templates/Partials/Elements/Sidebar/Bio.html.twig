@@ -13,17 +13,12 @@
     <div class="widget well">
         <h4>Compétences</h4>
         {% for skill in bio.skill %}
-            {% if skill.link is empty %}
-            <div class="row">
-                <p class="col-xs-5 col-sm-5">{{ skill.label }}</p>
-                <div class="col-xs-1 col-sm-3" style="background-color: #337ab7; height: 2em; width: {{ skill.level }}px;"></div>
-            </div>
-            {% else %}
+
             <div class="row">
                 <p class="col-xs-5 col-sm-5"><a href="{{ skill.link }}" target="_blank">{{ skill.label }}</a></p>
                 <div class="col-xs-1 col-sm-3" style="background-color: #337ab7; height: 2em; width: {{ skill.level }}px;"></div>
             </div>
-            {% endif %}
+
         {% endfor %}
     </div>
     <div class="widget well hidden-xs">

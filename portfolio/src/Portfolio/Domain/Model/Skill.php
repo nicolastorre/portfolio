@@ -47,6 +47,7 @@ class Skill extends Entity{
 	static public function loadValidatorMetadata(ClassMetadata $metadata)
 	{
 		$metadata->addPropertyConstraint('label', new Assert\NotBlank());
+		$metadata->addPropertyConstraint('link', new Assert\NotBlank());
 		$metadata->addPropertyConstraint('level', new Assert\NotBlank());
 	}
 
