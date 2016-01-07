@@ -4,7 +4,8 @@
 
     <div class="tab-pane fade in active adminTable well" id="articles">
     <h2>Articles</h2>
-    {% if articles %}
+        <a href="{{ path('addArticle') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
+        {% if articles %}
         <div class="table-responsive">
             <table class="table table-hover table-condensed">
                 <thead>
@@ -31,7 +32,6 @@
     {% else %}
         <div class="alert alert-warning">No articles found.</div>
     {% endif %}
-    <a href="{{ path('addArticle') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
 </div>
 
 
