@@ -16,7 +16,7 @@
                         <hr>
                         {#<p class="lead text-justify">{{ article.content|raw }}</p>#}
 
-                        {#{% include 'Partials/Article/ShareSocialNetwork.html.twig' %}#}
+                        {% include 'Partials/Article/ShareSocialNetwork.html.twig' %}
 
                         <p class="author-date text-right">Posté par <a href="{{ path('indexBio') }}">{{ user(article.author).username }}</a><i class="glyphicon glyphicon-time"></i> le {{ article.publishedDate |date("j M Y") }}</p>
 
