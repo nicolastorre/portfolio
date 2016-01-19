@@ -59,3 +59,4 @@ $app->match('/admin/user/delete', 'userController:deleteAction')->bind('deleteUs
 
 // Static pages
 $app->get('/mentions-legales', 'staticController:mentionslegalesAction')->bind('mentionslegalesStatic');
+$app->get('/bikelocator', 'staticController:bikelocatorAction')->bind('bikelocator');
