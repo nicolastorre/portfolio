@@ -70,6 +70,7 @@
         $('#article_image').fileinput({showUpload: false});
         $('.selectpicker *').selectpicker();
         tinymce.init({
+            extended_valid_elements:'script[language|type|src]',
             selector: "#article_content",
             theme: "modern",
             plugins: [
